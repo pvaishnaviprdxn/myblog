@@ -10,5 +10,11 @@
   <body>
     <div class="container">
       <header>
-        <h1><?php echo bloginfo('name'); ?></h1>
+        <div class="wrapper">
+          <h1><?php echo bloginfo('name'); ?></h1>
+          <?php 
+            $args = array('theme_location' => 'primary');
+          ?>
+          <nav><?php wp_nav_menu($args); ?></nav>
+        </div>
       </header>

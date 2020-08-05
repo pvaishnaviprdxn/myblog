@@ -1,6 +1,8 @@
   </main>
 </div>
   <footer>
-    <span><?php bloginfo('name');?> &copy; <?php echo date('Y'); ?></span>
+    <div class="wrapper">
+      <span><?php bloginfo('name');?> &copy; <?php echo date('Y'); ?></span>
+    </div>
   </footer>
   <?php wp_footer(); ?>
