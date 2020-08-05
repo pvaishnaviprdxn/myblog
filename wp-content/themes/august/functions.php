@@ -73,4 +73,8 @@
     } 
     echo $menu_list;
   }
+  
+  //option for featured images
+  add_theme_support('post-thumbnails');
+  
 ?>
