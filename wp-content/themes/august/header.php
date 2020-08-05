@@ -15,6 +15,6 @@
           <?php 
             $args = array('theme_location' => 'primary');
           ?>
-          <nav><?php wp_nav_menu($args); ?></nav>
+          <?php clean_custom_menus(); ?>
         </div>
       </header>
