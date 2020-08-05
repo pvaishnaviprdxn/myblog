@@ -3,7 +3,27 @@
 Template Name:Genres
 */
 get_header();
-$args = array('post_type' => 'genres', 'posts_per_page' => '-1');
+
+$cat_args = array(
+    'exclude' => array(1),
+    'option_All' => 'All',
+);
+$categories = get_categories($cat_args); ?>
+<section class="categories-dropdown">
+  <div class="wrapper">
+    <select>
+      <option>All</option>
+      <?php 
+        foreach($categories as $cat) { ?>
+          <option><?php echo $cat->name;?></option>
+        <?php }
+      
+      ?>
+    </select>
+  </div>
+</section>
+
+<?php $args = array('post_type' => 'genres', 'posts_per_page' => '-1');
 $myQuery = new WP_Query($args);
 if($myQuery->have_posts()) {
   while($myQuery->have_posts()) {
