@@ -11,11 +11,11 @@ $cat_args = array(
 $categories = get_categories($cat_args); ?>
 <section class="categories-dropdown">
   <div class="wrapper">
-    <select>
-      <option>All</option>
+    <select class="genre-category">
+      <option class="genres" value="All">All</option>
       <?php 
         foreach($categories as $cat) { ?>
-          <option><?php echo $cat->name;?></option>
+          <option class="genres" value="<?php echo $cat->term_id; ?>"><?php echo $cat->name;?></option>
         <?php }
       
       ?>
