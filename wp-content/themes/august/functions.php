@@ -14,7 +14,7 @@
   ));
 
   function custom_post_genre() {
-    $labels = array(
+    $labels = array (
       'name' => _x('Genres','Post Type General Name', 'august'),
       'singular_name' => _x('Genre','Post Type General Name', 'august'),
       'menu_name' => __('Genres', 'august'),
@@ -29,7 +29,7 @@
       'not_found'           => __( 'Not Found', 'august' ),
       'not_found_in_trash'  => __( 'Not found in Trash', 'august' ),
     );
-    $args = array(
+    $args = array (
       'label' => __('Genres', 'august'),
       'description' => __('Genre Details','august'),
       'labels' => $labels,
@@ -57,20 +57,19 @@
 
   function clean_custom_menus() {
     $menu_name = 'primary'; // specifing custom menu slug
-    
     if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
-        $menu = wp_get_nav_menu_object($locations[$menu_name]);
-        $menu_items = wp_get_nav_menu_items($menu->term_id);
+      $menu = wp_get_nav_menu_object($locations[$menu_name]);
+      $menu_items = wp_get_nav_menu_items($menu->term_id);
 
-        $menu_list = '<nav>' ."\n";
-        $menu_list .= "\t\t\t\t". '<ul>' ."\n";
-        foreach ((array) $menu_items as $key => $menu_item) {
-            $title = $menu_item->title;
-            $url = $menu_item->url;
-            $menu_list .= "\t\t\t\t\t". '<li><a href="'. $url .'">'. $title .'</a></li>' ."\n";
-        }
-        $menu_list .= "\t\t\t\t". '</ul>' ."\n";
-        $menu_list .= "\t\t\t". '</nav>' ."\n";
+      $menu_list = '<nav>' ."\n";
+      $menu_list .= "\t\t\t\t". '<ul>' ."\n";
+      foreach ((array) $menu_items as $key => $menu_item) {
+          $title = $menu_item->title;
+          $url = $menu_item->url;
+          $menu_list .= "\t\t\t\t\t". '<li><a href="'. $url .'">'. $title .'</a></li>' ."\n";
+      }
+      $menu_list .= "\t\t\t\t". '</ul>' ."\n";
+      $menu_list .= "\t\t\t". '</nav>' ."\n";
     } 
     echo $menu_list;
   }
