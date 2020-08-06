@@ -90,6 +90,7 @@
       'post_type' => 'genres',
       'posts_per_page' => '-1',
     );
+
     if(isset($category)) {
       $args_post['category__in'] = array($category);
     }
@@ -97,15 +98,36 @@
     $query = new WP_Query($args_post);
     if ($query->have_posts()) {
       while ($query->have_posts()) {
-        $query->the_post(); ?>
-        <div class="wrapper">
-          <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-          <?php echo get_the_excerpt(); ?>
-        </div>
-      <?php }
+        $query->the_post(); 
+        $title= get_the_title();
+        $excerpt = get_the_excerpt();
+        $date = get_the_date();
+        $featuredImage = get_the_post_thumbnail($page->ID, 'thumbnail', array( 'class' => 'featured-image' ) ); 
+        $readbtn = get_field('read_more');
+        $detailslink = get_the_permalink();
+        ?>
+
+        <?php if ($title && $excerpt && $featuredImage) { ?>
+          <div class="wrapper">
+            <figure>
+              <?php echo $featuredImage; ?>
+            </figure>
+            <h1><a href="<?php echo $detailslink; ?>"><?php echo $title; ?></a></h1>
+            <span class="date"><strong><?php echo $date; ?></strong></span>
+            <p><?php echo $excerpt; ?></p>
+            <?php if($readbtn) { ?>
+              <a href="<?php echo $detailslink; ?>"><?php echo $readbtn; ?></a>
+            <?php } ?>
+          </div>
+        <?php }
+      }
     }
   }
   add_action('wp_ajax_nopriv_filter','filterAjax');
   add_action('wp_ajax_filter','filterAjax');
-  
+  //excerpt length
+  function custom_excerpt_length( $length ) {
+	  return 20;
+  }
+  add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 ?>
