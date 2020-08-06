@@ -35,7 +35,7 @@
       'labels' => $labels,
       // Features this CPT supports in Post Editor
       'supports' => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
-      'taxonomies' => array( 'category' ),
+      'taxonomies' => array('post_tag','category' ),
       'hierarchical'        => false,
       'public'              => true,
       'show_ui'             => true,
@@ -104,7 +104,7 @@
         $date = get_the_date();
         $featuredImage = get_the_post_thumbnail($page->ID, 'thumbnail', array( 'class' => 'featured-image' ) ); 
         $readbtn = get_field('read_more');
-        $detailslink = get_the_permalink();
+        $detailslink = get_the_permalink($post->ID);
         ?>
 
         <?php if ($title && $excerpt && $featuredImage) { ?>

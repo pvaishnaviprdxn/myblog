@@ -34,6 +34,7 @@ if($myQuery->have_posts()) {
     $featuredImage = get_the_post_thumbnail($page->ID, 'thumbnail', array( 'class' => 'featured-image' ) ); 
     $readbtn = get_field('read_more');
     $detailslink = get_the_permalink(); ?>
+    
     <?php if ($title && $excerpt && $featuredImage) { ?>
       <div class="wrapper">
         <figure>
