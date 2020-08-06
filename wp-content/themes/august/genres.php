@@ -11,18 +11,17 @@ $cat_args = array(
 $categories = get_categories($cat_args); ?>
 <section class="categories-dropdown">
   <div class="wrapper">
-    <select class="genre-category">
+    <select id="genre-category">
       <option class="genres" value="All">All</option>
       <?php 
         foreach($categories as $cat) { ?>
           <option class="genres" value="<?php echo $cat->term_id; ?>"><?php echo $cat->name;?></option>
         <?php }
-      
       ?>
     </select>
   </div>
 </section>
-
+<section class="posts-filter">
 <?php $args = array('post_type' => 'genres', 'posts_per_page' => '-1');
 $myQuery = new WP_Query($args);
 if($myQuery->have_posts()) {
@@ -35,4 +34,5 @@ if($myQuery->have_posts()) {
   <?php }
 }
 ?>
+</section>
 <?php get_footer(); ?>

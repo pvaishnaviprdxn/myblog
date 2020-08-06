@@ -83,5 +83,29 @@
     wp_localize_script( 'ajax', 'wpAjax', array( 'ajaxUrl' => admin_url('admin-ajax.php')));
   }
   add_action('wp_enqueue_scripts', 'categories_script');
+
+  function filterAjax() {
+    $category = $_POST['category'];
+    $args_post = array(
+      'post_type' => 'genres',
+      'posts_per_page' => '-1',
+    );
+    if(isset($category)) {
+      $args_post['category__in'] = array($category);
+    }
+
+    $query = new WP_Query($args_post);
+    if ($query->have_posts()) {
+      while ($query->have_posts()) {
+        $query->the_post(); ?>
+        <div class="wrapper">
+          <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+          <?php echo get_the_excerpt(); ?>
+        </div>
+      <?php }
+    }
+  }
+  add_action('wp_ajax_nopriv_filter','filterAjax');
+  add_action('wp_ajax_filter','filterAjax');
   
 ?>
