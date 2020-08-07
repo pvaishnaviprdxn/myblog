@@ -23,25 +23,28 @@ get_header();
       }
     }
   }
-  /*$tags = wp_get_post_tags($post->ID);
-  //echo "<pre>".print_r($tags)."</pre>"; 
-  if ($tags) {
-    echo 'Related Posts';
-    $first_tag = $tags[0]->term_id;
-    $args = array (
-      'tag__in' => array($first_tag),
-      'post__not_in' => array($post->ID),
-      'posts_per_page'=>1,
-      'caller_get_posts'=>1
-    );
-    $query = new WP_Query($args);
-    if( $query->have_posts() ) {
-      while ($query->have_posts()) {
-        $query->the_post(); ?>
-        <h1><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
-      <?php }
-    } 
-  }*/
+  $featured_posts = get_field('related_posts');
+  $title = get_field('title');
+  if( $featured_posts && $title ) { ?>
+    <section class="realted-posts">
+      <div class="wrapper">
+        <h2><?php echo $title; ?></h2>
+        <ul>
+          <?php foreach( $featured_posts as $featured_post ) {
+              $permalink = get_permalink( $featured_post->ID );
+              $title = get_the_title( $featured_post->ID );
+              $custom_field = get_field( 'content', $featured_post->ID );
+              $excerpt = get_the_excerpt($featured_post->ID);
+              ?>
+              <li>
+                  <h3><a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a></h3>
+                  <?php echo $excerpt ? '<p>'.$excerpt.'</p>' : null; ?>
+              </li>
+          <?php } ?>
+        </ul>
+      </div>
+    </section>
+  <?php }
 
 get_footer();
 ?>

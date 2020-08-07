@@ -5,14 +5,15 @@ Template Name:Genres
 get_header();
 
 $cat_args = array(
-    'exclude' => array(1),
-    'option_All' => 'All',
+  'exclude' => array(1),
+  'option_All' => 'All',
 );
-$categories = get_categories($cat_args); ?>
+$categories = get_categories($cat_args); 
+$term_link = get_term_link( $categories ); ?>
 <section class="categories-dropdown">
   <div class="wrapper">
     <select id="genre-category">
-      <option class="genres" value="All">All</option>
+      <option class="genres">All</option>
       <?php 
         foreach($categories as $cat) { ?>
           <option class="genres" value="<?php echo $cat->term_id; ?>"><?php echo $cat->name;?></option>
@@ -23,7 +24,9 @@ $categories = get_categories($cat_args); ?>
 </section>
 
 <section class="posts-filter">
-<?php $args = array('post_type' => 'genres', 'posts_per_page' => '-1');
+<?php 
+$postsperpage = 4;
+$args = array('post_type' => 'genres', 'posts_per_page' => $postsperpage);
 $myQuery = new WP_Query($args);
 if($myQuery->have_posts()) {
   while($myQuery->have_posts()) {

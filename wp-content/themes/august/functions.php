@@ -84,6 +84,7 @@
   }
   add_action('wp_enqueue_scripts', 'categories_script');
 
+  //dropdown functionality
   function filterAjax() {
     $category = $_POST['category'];
     $args_post = array(
@@ -126,8 +127,13 @@
   add_action('wp_ajax_nopriv_filter','filterAjax');
   add_action('wp_ajax_filter','filterAjax');
   //excerpt length
-  function custom_excerpt_length( $length ) {
-	  return 20;
-  }
-  add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+  //function custom_excerpt_length( $length ) {
+	//  return 20;
+  //}
+  //add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+  //load more
+
+  
+  
 ?>
