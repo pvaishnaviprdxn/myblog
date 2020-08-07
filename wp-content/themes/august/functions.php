@@ -135,5 +135,51 @@
   //load more
 
   
+function more_post_ajax() {
+
+  $ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
+  $page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
+
+  //header("Content-Type: text/html");
+
+  $args = array(
+      'suppress_filters' => true,
+      'post_type' => 'genres',
+      'posts_per_page' => $ppp,
+      'paged'    => $page,
+  );
+
+  $loop = new WP_Query($args);
+
+  if ($loop->have_posts()) {
+    while ($loop->have_posts()) {
+      $loop->the_post();
+      $title= get_the_title();
+      $excerpt = get_the_excerpt();
+      $date = get_the_date();
+      $featuredImage = get_the_post_thumbnail($page->ID, 'thumbnail', array( 'class' => 'featured-image' ) ); 
+      $readbtn = get_field('read_more');
+      $detailslink = get_the_permalink(); ?> 
+      <?php if ($title && $excerpt && $featuredImage) { ?>
+        <div class="wrapper">
+          <figure>
+            <?php echo $featuredImage; ?>
+          </figure>
+          <h1><a href="<?php echo $detailslink; ?>"><?php echo $title; ?></a></h1>
+          <span class="date"><strong><?php echo $date; ?></strong></span>
+          <p><?php echo $excerpt; ?></p>
+          <?php if($readbtn) { ?>
+            <a href="<?php echo $detailslink; ?>"><?php echo $readbtn; ?></a>
+          <?php } ?>
+        </div>
+      <?php }  
+    } 
+  } ?>
+  <?php wp_reset_postdata();
+  die($out);
+}
+
+add_action('wp_ajax_nopriv_more_post_ajax', 'more_post_ajax');
+add_action('wp_ajax_more_post_ajax', 'more_post_ajax');
   
 ?>

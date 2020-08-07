@@ -55,4 +55,8 @@ if($myQuery->have_posts()) {
 }
 ?>
 </section>
+<div class="wrapper">
+  <a href="#FIXME" class="load">Load</a>
+</div>
+ 
 <?php get_footer(); ?>
