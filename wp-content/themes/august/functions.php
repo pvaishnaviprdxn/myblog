@@ -127,10 +127,10 @@
   add_action('wp_ajax_nopriv_filter','filterAjax');
   add_action('wp_ajax_filter','filterAjax');
   //excerpt length
-  //function custom_excerpt_length( $length ) {
-	//  return 20;
-  //}
-  //add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+  function custom_excerpt_length( $length ) {
+	  return 20;
+  }
+  add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
   //load more
 
@@ -167,7 +167,7 @@ function more_post_ajax() {
           </figure>
           <h1><a href="<?php echo $detailslink; ?>"><?php echo $title; ?></a></h1>
           <span class="date"><strong><?php echo $date; ?></strong></span>
-          <p><?php echo $excerpt; ?></p>
+          <p><?php echo substr($excerpt,0,20); ?></p>
           <?php if($readbtn) { ?>
             <a href="<?php echo $detailslink; ?>"><?php echo $readbtn; ?></a>
           <?php } ?>

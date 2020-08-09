@@ -103,9 +103,11 @@ li {
   height: 300px;
 }
 
-.movie-poster {
-  
+.load { 
+  cursor:pointer;
 }
+
+
 
 
 
